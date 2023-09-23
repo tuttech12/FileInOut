@@ -94,6 +94,23 @@ public class FileInOut {
     private void setOutFilename(String outFilename){
         this.outFilename = outFilename;
     }
+
+    /**
+     * Returns true if the input file's Scanner is open, false otherwise.
+     *
+     * @return True if the input file's Scanner is open, false otherwise.
+     */
+    public boolean inFileIsOpen(){
+        return inFileOpen;
+    }
+    /**
+     * Returns true if the input file's PrintWriter is open, false otherwise.
+     *
+     * @return true if the input file's PrintWriter is open, false otherwise.
+     */
+    public boolean outFileIsOpen (){
+        return outFileIsOpen;
+    }
     /**
      * Opens the input file for input using a Scanner
      * <p>
@@ -110,18 +127,27 @@ public class FileInOut {
             inFile = new File(DEFAULTINFILENAME);
         }
 
+
         try {
             inFileScanner = new Scanner(inFile);
         } catch (FileNotFoundException e) {
             String message = "Cannot open input file! \n" + e.getMessage();
             throw new FileNotFoundException(message);
         }
-
+        inFileIsOpen = true;
     }
     /**
-     * openOutFile()
+     * Open outfile's PrintWriter openOutFile()
      */
+    public void openOutFile(){
+        File outFile;
 
+        if (!outFilename.isEmpty()){
+            outFile = new File(outFilename);
+        } else {
+            outFile = new File(DEFAULTINFILENAME);
+        }
+    }
     /**
      * openFiles()
      */
