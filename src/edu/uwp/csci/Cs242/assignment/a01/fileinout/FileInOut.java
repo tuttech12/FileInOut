@@ -63,8 +63,28 @@ public class FileInOut {
      */
     private boolean outFileIsOpen = false;
 
-    // TODO: write a meaningful constructor.
-    //public FileInOut()
+    /**
+     * This constructor uses the provided input and output file names to set the objects internal
+     * input and outfile file names.
+     * <p>
+     *  The files can also be opened by passing TRUE as the pOpenFlag parameter
+     * <p>
+     * @param pIn - String value for the name of the input file
+     * @param pOut - String value for the name of the output file
+     * @param pOpenFlag - Flag that determined whether the files will be opened or not. TRUE means that the
+     *                      files should be opened; FALSE otherwise.
+     * @throws FileNotFoundException if the input file does not exist, input file cannot be written into, or the output
+     *  file cannot be written into.
+     */
+
+    public FileInOut(String pIn, String pOut, Boolean pOpenFlag) throws FileNotFoundException {
+        inFilename = pIn;
+        outFilename = pOut;
+
+        if(pOpenFlag){
+            openFiles();
+        }
+    }
 
     // region Getters and Setters
     /**
@@ -124,7 +144,7 @@ public class FileInOut {
      * <p>
      *  This method opens the file whose name is specified in the class level variable inFilename. The length
      *  is checked to ensure the variable has content. The file is opened via the Java Scanner class.
-     *
+     * @throws FileNotFoundException if the input file does not exist or cannot be read
      */
     public void openInFile() throws FileNotFoundException {
         File inFile;
@@ -152,6 +172,7 @@ public class FileInOut {
      * This method opens the outFile's PrinterWriter. The length is checked to ensure the variable has content. The
      * file is opened via the Java PrintWriter class.
      *
+     *  @throws FileNotFoundException if the output file cannot be written into
      */
     public void openOutFile() throws FileNotFoundException {
         File outFile;
@@ -176,6 +197,33 @@ public class FileInOut {
         outFileIsOpen = true;
     }
     /**
-     * openFiles()
+     * Meta-method that opens both the input file and the output file
      */
+    public void openFiles() throws FileNotFoundException {
+        openInFile();
+        openOutFile();
+    }
+
+    /**
+     * Meta-method to close all the open files
+     */
+    public void closeFiles(){
+        closeInFile();
+        closeOutFile();
+    }
+    /**
+     * Method to close the input file
+     */
+    public void closeInFile(){
+        inFileScanner.close();
+        inFileIsOpen = false;
+    }
+
+    /**
+     * Method to close the output file
+     */
+    public void closeOutFile(){
+        outFileWriter.close();
+        outFileIsOpen = false;
+    }
 }
