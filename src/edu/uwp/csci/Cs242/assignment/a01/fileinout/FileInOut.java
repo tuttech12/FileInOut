@@ -18,8 +18,6 @@ import java.util.Scanner;
  *
  * @author Tyler Uttech
  * edu.uwp.cs.242.course CSCI 242 - Computer Science II
- * edu.uwp.cs.242.section 001
- * edu.uwp.cs.242.assignment 1
  * bugs plenty right now
  *
  */
@@ -54,6 +52,16 @@ public class FileInOut {
      * The PrintWriter to write for the output file.
      */
     private PrintWriter outFileWriter;
+
+    /**
+     * Represents whether the input file's Scanner is open or not.
+     */
+    private boolean inFileIsOpen = false;
+
+    /**
+     * Represents whether the output file's PrintWriter is open or not.
+     */
+    private boolean outFileIsOpen = false;
 
     // TODO: write a meaningful constructor.
     //public FileInOut()
@@ -101,7 +109,7 @@ public class FileInOut {
      * @return True if the input file's Scanner is open, false otherwise.
      */
     public boolean inFileIsOpen(){
-        return inFileOpen;
+        return inFileIsOpen;
     }
     /**
      * Returns true if the input file's PrintWriter is open, false otherwise.
@@ -127,6 +135,10 @@ public class FileInOut {
             inFile = new File(DEFAULTINFILENAME);
         }
 
+        // Close the scanner if it's already open before assigning new object
+        if (inFileIsOpen){
+            inFileScanner.close();
+        }
 
         try {
             inFileScanner = new Scanner(inFile);
@@ -137,16 +149,31 @@ public class FileInOut {
         inFileIsOpen = true;
     }
     /**
-     * Open outfile's PrintWriter openOutFile()
+     * This method opens the outFile's PrinterWriter. The length is checked to ensure the variable has content. The
+     * file is opened via the Java PrintWriter class.
+     *
      */
-    public void openOutFile(){
+    public void openOutFile() throws FileNotFoundException {
         File outFile;
 
         if (!outFilename.isEmpty()){
             outFile = new File(outFilename);
         } else {
-            outFile = new File(DEFAULTINFILENAME);
+            outFile = new File(DEFAULTOUTFILENAME);
         }
+
+        // Close the PrintWriter if it's already open before assigning a new object
+        if (outFileIsOpen){
+            outFileWriter.close();
+        }
+
+        try {
+            outFileWriter = new PrintWriter(outFile);
+        } catch (FileNotFoundException e) {
+            String message = "Cannot open output file! \n" + e.getMessage();
+            throw new FileNotFoundException(message);
+        }
+        outFileIsOpen = true;
     }
     /**
      * openFiles()
