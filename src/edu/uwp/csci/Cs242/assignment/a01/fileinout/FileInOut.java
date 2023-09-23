@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+
 /**
  * FileInOut holds and keeps track of a Scanner for an input file and a
  * PrintWriter for an output file, which is used to for reading input and
@@ -17,8 +18,8 @@ import java.util.Scanner;
  *  its relative property of this.
  *
  * @author Tyler Uttech
- * edu.uwp.cs.242.course CSCI 242 - Computer Science II
- * bugs plenty right now
+ * @edu.uwp.cs.242.course CSCI 242 - Computer Science II
+ * @bugs plenty right now TODO:  remove this when done
  *
  */
 public class FileInOut {
@@ -149,14 +150,15 @@ public class FileInOut {
     public void openInFile() throws FileNotFoundException {
         File inFile;
 
-        if(!inFilename.isEmpty()){
+        if (!inFilename.isEmpty()) {
             inFile = new File(inFilename);
         } else {
+            System.out.println("File is empty. Switching to default file.");
             inFile = new File(DEFAULTINFILENAME);
         }
 
         // Close the scanner if it's already open before assigning new object
-        if (inFileIsOpen){
+        if (inFileIsOpen) {
             inFileScanner.close();
         }
 
@@ -166,7 +168,8 @@ public class FileInOut {
             String message = "Cannot open input file! \n" + e.getMessage();
             throw new FileNotFoundException(message);
         }
-        inFileIsOpen = true;
+            inFileIsOpen = true;
+
     }
     /**
      * This method opens the outFile's PrinterWriter. The length is checked to ensure the variable has content. The
@@ -180,6 +183,7 @@ public class FileInOut {
         if (!outFilename.isEmpty()){
             outFile = new File(outFilename);
         } else {
+            System.out.println("File is empty. Switching to default file.");
             outFile = new File(DEFAULTOUTFILENAME);
         }
 
