@@ -7,11 +7,11 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
- * A program to encrypt a selected file
+ * A program to test FileInOut
  *
  * @author Tyler Uttech
  * @edu.uwp.edu.cs.242.course CS242 - Computer Science II
- * @bugs none since they're is no program at the moment // TODO:  remove this when done
+ * @bugs none
  */
 public class MainDriver {
     public static void main (String [] args) throws FileNotFoundException {

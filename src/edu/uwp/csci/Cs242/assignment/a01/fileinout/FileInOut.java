@@ -19,7 +19,7 @@ import java.util.Scanner;
  *
  * @author Tyler Uttech
  * @edu.uwp.cs.242.course CSCI 242 - Computer Science II
- * @bugs plenty right now TODO:  remove this when done
+ * @bugs none
  *
  */
 public class FileInOut {
